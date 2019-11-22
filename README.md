@@ -2,6 +2,9 @@
 
 
 ## 资料
-https://spring.io/guides spring集成组件
-git commit --amend --no-edit
+[spring 文档](https://spring.io/guides)
+
+[Git app文档](https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/)
+
+git commit --amend --no-edit 追加到之前的commit上
 ## 工具
