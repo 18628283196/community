@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Controller
@@ -20,6 +22,7 @@ public class AuthorizeController {
     private GithubProvider githubProvider;
     @Autowired
     private UserMapper userMapper;
+
     @Value(value = "${github.client.id}")
     private String clientId;
     @Value(value = "${github.client.secret}")
@@ -31,7 +34,7 @@ public class AuthorizeController {
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code")String code,
                            @RequestParam(name = "state")String state,
-                           HttpServletRequest request){
+                           HttpServletRequest request, HttpServletResponse response){
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setCode(code);
         accessTokenDTO.setState(state);
@@ -40,17 +43,21 @@ public class AuthorizeController {
         accessTokenDTO.setClient_secret(secret);
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
         GithubUser getUser = githubProvider.getUser(accessToken);
-        System.out.println(getUser.getName());
+
         if (getUser != null){
             User user = new User();
-            user.setToken(UUID.randomUUID().toString());
+            String token = UUID.randomUUID().toString();
+            user.setToken(token);
             user.setName(getUser.getName());
             user.setAccountId(String.valueOf(getUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(System.currentTimeMillis());
+            //这里就相当于存入Session中
             userMapper.insert(user);
+            response.addCookie(new Cookie("token",token));
+            System.out.println(token);
             //登录成功，写入cookie和Session
-            request.getSession().setAttribute("user", getUser);
+            /*request.getSession().setAttribute("user", getUser);*/
             return "redirect:/";
         }else{
             //登录失败，重新登陆
