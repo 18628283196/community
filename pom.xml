@@ -58,6 +58,20 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>2.1.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.10</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!--实现热部署，需要去setting勾选compiler下的第五个选择框，还需要在regitry（ctrl+shift+alt+?）
+		勾选一个compiler.automake.allow.when.app.running,再点击close就可以了-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 
 
 		<dependency>

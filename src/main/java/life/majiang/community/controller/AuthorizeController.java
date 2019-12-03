@@ -41,6 +41,7 @@ public class AuthorizeController {
         accessTokenDTO.setClient_id(clientId);
         accessTokenDTO.setRedirect_uri(redirectUri);
         accessTokenDTO.setClient_secret(secret);
+
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
         GithubUser getUser = githubProvider.getUser(accessToken);
 
@@ -52,6 +53,7 @@ public class AuthorizeController {
             user.setAccountId(String.valueOf(getUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(System.currentTimeMillis());
+            user.setAvatarUrl(getUser.getAvatarUrl());
             //这里就相当于存入Session中
             userMapper.insert(user);
             response.addCookie(new Cookie("token",token));
