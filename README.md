@@ -8,6 +8,11 @@
 
 [spring 官方文档](https://spring.io/projects/spring-boot)
 [thymeleaf模板使用官网](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#using-theach)
+[mybatis逆向工程官网](http://mybatis.org/generator/)
 
-追加到上次的提交上去：git commit --amend --no-edit
 ## 工具
+
+```bash
+mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
+追加到上次的提交上去：git commit --amend --no-edit
+```
