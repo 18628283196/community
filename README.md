@@ -15,4 +15,8 @@
 ```bash
 mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
 追加到上次的提交上去：git commit --amend --no-edit
+ctrl+shift+R :查找文化
+Ctrl+Alt+L :格式化
+Ctrl+shift+alt+N ：快速查找类
+
 ```

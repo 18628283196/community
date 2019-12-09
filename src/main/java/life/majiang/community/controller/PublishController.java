@@ -15,53 +15,55 @@ import javax.servlet.http.HttpServletRequest;
 public class PublishController {
     @Autowired
     private QuestionService questionService;
+
     @GetMapping("/publish/{id}")
-    public String edit(@PathVariable(name = "id")Integer id,
-                       Model model){
+    public String edit(@PathVariable(name = "id") Integer id,
+                       Model model) {
         QuestionDTO question = questionService.getById(id);
-        model.addAttribute("title",question.getTitle());
-        model.addAttribute("description",question.getDescription());
-        model.addAttribute("tag",question.getTag());
-        model.addAttribute("id",question.getId());
+        model.addAttribute("title", question.getTitle());
+        model.addAttribute("description", question.getDescription());
+        model.addAttribute("tag", question.getTag());
+        model.addAttribute("id", question.getId());
         return "publish";
     }
+
     @GetMapping("/publish")
-    public String publish(HttpServletRequest request){
+    public String publish(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
-        if (user == null){
+        if (user == null) {
             return "redirect:/";
         }
         return "publish";
     }
 
     @PostMapping("/publish")
-    public String doPublish(@RequestParam(value = "title",required = false) String title,
-                            @RequestParam(value = "description",required = false) String description,
-                            @RequestParam(value = "tag",required = false) String tag,
-                            @RequestParam(value = "id",required = false) Integer id,
+    public String doPublish(@RequestParam(value = "title", required = false) String title,
+                            @RequestParam(value = "description", required = false) String description,
+                            @RequestParam(value = "tag", required = false) String tag,
+                            @RequestParam(value = "id", required = false) Integer id,
                             HttpServletRequest request,
-                            Model model){
+                            Model model) {
 
-        model.addAttribute("title",title);
-        model.addAttribute("description",description);
-        model.addAttribute("tag",tag);
+        model.addAttribute("title", title);
+        model.addAttribute("description", description);
+        model.addAttribute("tag", tag);
         if (title == null || title.isEmpty()) {
-            model.addAttribute("error","标题不能为空");
+            model.addAttribute("error", "标题不能为空");
             return "publish";
         }
-        if (description == null || description.isEmpty() ) {
-            model.addAttribute("error","发布内容不能为空");
+        if (description == null || description.isEmpty()) {
+            model.addAttribute("error", "发布内容不能为空");
             return "publish";
         }
         if (tag == null || tag.isEmpty()) {
-            model.addAttribute("error","标签不能为空");
+            model.addAttribute("error", "标签不能为空");
             return "publish";
         }
 
 
         User user = (User) request.getSession().getAttribute("user");
-        if (user == null){
-            model.addAttribute("error","用户未登录");
+        if (user == null) {
+            model.addAttribute("error", "用户未登录");
             return "publish";
         }
         Question question = new Question();

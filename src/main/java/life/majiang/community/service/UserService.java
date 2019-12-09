@@ -17,12 +17,12 @@ public class UserService {
         UserExample example = new UserExample();
         example.createCriteria().andAccountIdEqualTo(user.getAccountId());
         List<User> users = userMapper.selectByExample(example);
-        if (users.size() == 0){
+        if (users.size() == 0) {
             //插入用户信息
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(System.currentTimeMillis());
             userMapper.insert(user);
-        }else {
+        } else {
             User dbUser = users.get(0);
             //更新
             User updateUser = new User();

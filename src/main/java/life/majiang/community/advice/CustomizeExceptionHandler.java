@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class CustomizeExceptionHandler {
     @ExceptionHandler()
-    ModelAndView handler(HttpServletRequest request, Throwable ex, Model model){
-        if (ex instanceof CustomizeExceprion){
-            model.addAttribute("message",ex.getMessage());
-        }else {
-            model.addAttribute("message","服务已经冒烟了，请稍后试试");
+    ModelAndView handler(HttpServletRequest request, Throwable ex, Model model) {
+        if (ex instanceof CustomizeExceprion) {
+            model.addAttribute("message", ex.getMessage());
+        } else {
+            model.addAttribute("message", "服务已经冒烟了，请稍后试试");
         }
         return new ModelAndView("error");
     }

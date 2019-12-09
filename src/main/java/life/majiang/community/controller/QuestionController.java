@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class QuestionController {
     @Autowired
     private QuestionService questionService;
+
     @GetMapping(value = "/question/{id}")
-    public String requestion(@PathVariable(name = "id") Integer id, Model model){
+    public String requestion(@PathVariable(name = "id") Integer id, Model model) {
         QuestionDTO questionDTO = questionService.getById(id);
-        model.addAttribute("question",questionDTO);
+        model.addAttribute("question", questionDTO);
         return "question";
     }
 }
