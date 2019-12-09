@@ -45,7 +45,7 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
         <!-- 指定数据库表 -->
-        <table schema="" tableName="question" enableCountByExample="true" enableSelectByExample="true"
+        <table schema="" tableName="comment" enableCountByExample="true" enableSelectByExample="true"
                enableDeleteByExample="true" enableUpdateByExample="true" selectByExampleQueryId="true"/>
         <!--<table schema="" tableName="user" enableCountByExample="true" enableSelectByExample="true"
                enableDeleteByExample="true" enableUpdateByExample="true" selectByExampleQueryId="true"/>-->
